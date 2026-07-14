@@ -36,34 +36,7 @@ export default function Index() {
                 <Text style={styles.ctaText}>  I Want to Help  </Text>
               </Pressable>
         </View>
-        <View style={styles.divider}></View>
-        <View>
-          <Text style={styles.subtitle}>
-            {`\nThe IDE Project`}
-          </Text>
-          <Text style={styles.subdescription}>
-            {`Youth Led Initiative\n\nThe Ide Project is a youth-led initiative\nconnecting exonerees nationwide with\nverified reentry support organizations,\nhousing assistance, employment\nprograms, legal resources, and\ncommunity advocacy. We provide\ncomprehensive reentry support and\nexoneree resources to help rebuild lives\nafter wrongful conviction.`}
-          </Text>
-          <Text style={styles.subtitle}>
-            {`\nResource Pages`}
-          </Text>
-          <Text style={styles.subdescription}>
-            {`\nHome\n\nFinancial Literacy\n\nGet Help Now\n\nSupport Now`}
-          </Text>
-          <Text style={styles.subtitle}>
-            {`\nGet Involved`}
-          </Text>
-          <Text style={styles.subdescription}>
-            {`\nWhether you are an exoneree, a family member, or\nsomeone who wants to help, there are ways to make a\ndifference.`}
-          </Text>
-          <Text style={styles.resourcebtn}>
-            {`\nView Helpful Resources → `}
-          </Text>
-        </View>
-        <View style={styles.divider}></View>
-        <Text style = {styles.copyright}>
-          © 2026 The Ide Project. All rights reserved.
-        </Text>
+        
 
 
         
