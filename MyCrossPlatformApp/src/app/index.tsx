@@ -58,9 +58,10 @@ const styles = StyleSheet.create({
   },
   subtitle:{
     fontSize:23,
+    fontWeight: 400
   },
   subdescription:{
-    color: "#5e5e5e"
+    color: "#5e5e5e",
   },
 
   divider: {
@@ -90,10 +91,10 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   signUpButton:{
-    backgroundColor:"#FFFFFF",
     paddingHorizontal:14,
     paddingVertical:6,
-    borderRadius: 6,
+    borderRadius: 6,  
+    backgroundColor: 'transparent',
   },
   signInText: {
     color: "#FFFFFF",
