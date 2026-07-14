@@ -8,7 +8,7 @@ export default function Index() {
     <SafeAreaView style={styles.safeArea}>
       <Stack.Screen 
         options={{ 
-          title: 'The IDE Project: Youth Led Initiative',
+          title: 'The IDE Project',
           headerRight: () => (
             <View style={styles.headerButtonsContainer}>
               <Pressable style={styles.signInButton}>
@@ -23,12 +23,12 @@ export default function Index() {
       />
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.heroSection}>
-          <Text style={[styles.navLogo, { fontFamily: "Times New Roman" }]}>Ide Project</Text>
+          <Text style={[styles.navLogo, { fontFamily: "serif" }]}>Ide Project</Text>
           <Text style={styles.description}>
             {`\nThe Ide Project, led by youth\nchangemakers, connects exonerees\nnationwide with verified reentry support\norganizations, housing resources, job\ntraining programs, and community\nadvocacy. Get help after wrongful\nconviction.`}
           </Text>
         </View>
-        <View style={styles.headerButtonsContainer}>
+        <View style={styles.ctaContainer}>
               <Pressable style={[styles.ctaButton, styles.helpBtn]}>
                 <Text style={styles.ctaText2}>  I Need Help  </Text>
               </Pressable>
@@ -36,14 +36,35 @@ export default function Index() {
                 <Text style={styles.ctaText}>  I Want to Help  </Text>
               </Pressable>
         </View>
-        <View style={styles.divider}>
+        <View style={styles.divider}></View>
+        <View>
           <Text style={styles.subtitle}>
             {`\nThe IDE Project`}
           </Text>
           <Text style={styles.subdescription}>
             {`Youth Led Initiative\n\nThe Ide Project is a youth-led initiative\nconnecting exonerees nationwide with\nverified reentry support organizations,\nhousing assistance, employment\nprograms, legal resources, and\ncommunity advocacy. We provide\ncomprehensive reentry support and\nexoneree resources to help rebuild lives\nafter wrongful conviction.`}
           </Text>
+          <Text style={styles.subtitle}>
+            {`\nResource Pages`}
+          </Text>
+          <Text style={styles.subdescription}>
+            {`\nHome\n\nFinancial Literacy\n\nGet Help Now\n\nSupport Now`}
+          </Text>
+          <Text style={styles.subtitle}>
+            {`\nGet Involved`}
+          </Text>
+          <Text style={styles.subdescription}>
+            {`\nWhether you are an exoneree, a family member, or\nsomeone who wants to help, there are ways to make a\ndifference.`}
+          </Text>
+          <Text style={styles.resourcebtn}>
+            {`\nView Helpful Resources → `}
+          </Text>
         </View>
+        <View style={styles.divider}></View>
+        <Text style = {styles.copyright}>
+          © 2026 The Ide Project. All rights reserved.
+        </Text>
+
 
         
       </ScrollView>
@@ -52,9 +73,17 @@ export default function Index() {
 }
 
 const styles = StyleSheet.create({
+  copyright:{
+    color:"#5e5e5e",
+    textAlign: "center",
+  },
   safeArea: {
     flex: 1,
     backgroundColor: "#ffffff",
+  },
+  resourcebtn:{
+    fontWeight: "bold",
+    fontSize: 16,
   },
   subtitle:{
     fontSize:23,
@@ -83,6 +112,7 @@ const styles = StyleSheet.create({
   navLogo: {
     color: "#000000",
     fontSize: 50,
+    textAlign: "center",
   },
   signInButton: {
     backgroundColor: "#d57e57",
@@ -115,7 +145,7 @@ const styles = StyleSheet.create({
   description: {
     color: "#343639",
     fontSize: 16,
-    textAlign: "left",
+    textAlign: "center",
     lineHeight: 24,
     marginBottom: 16,
   },
@@ -127,23 +157,29 @@ const styles = StyleSheet.create({
   },
   ctaContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
+    alignItems:'center',
+    width: '100%',
     gap: 12,
     marginBottom: 32,
   },
   ctaButton: {
     paddingVertical: 6,
     borderRadius: 6,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   helpBtn: {
-    backgroundColor: "#d57e57"
+    backgroundColor: "#d57e57",
+    justifyContent:'center',
+    alignItems: 'center'
   },
   volunteerBtn: {
     borderWidth: 2,      
     borderColor: '#000000',    
     backgroundColor: 'transparent',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   ctaText: {
     color: "#000000",
