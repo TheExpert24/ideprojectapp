@@ -28,33 +28,24 @@ export default function Index() {
             {`\nThe Ide Project, led by youth\nchangemakers, connects exonerees\nnationwide with verified reentry support\norganizations, housing resources, job\ntraining programs, and community\nadvocacy. Get help after wrongful\nconviction.`}
           </Text>
         </View>
-        <View style={styles.ctaContainer}>
-          <Pressable style={[styles.ctaButton, styles.helpBtn]}>
-            <Text style={styles.ctaText2}>I Need Help → </Text>
-          </Pressable>
-          <Pressable style={[styles.ctaButton, styles.volunteerBtn]}>
-            <Text style={styles.ctaText}>I Want to Help</Text>
-          </Pressable>
+        <View style={styles.headerButtonsContainer}>
+              <Pressable style={[styles.ctaButton, styles.helpBtn]}>
+                <Text style={styles.ctaText2}>  I Need Help  </Text>
+              </Pressable>
+              <Pressable style={[styles.ctaButton, styles.volunteerBtn]}>
+                <Text style={styles.ctaText}>  I Want to Help  </Text>
+              </Pressable>
         </View>
-        <Text style={styles.sectionHeader}>Featured Resources</Text>
-
-        <View style={styles.card}>
-          <Text style={styles.cardCategory}>Financial Planning</Text>
-          <Text style={styles.cardTitle}>Opening Your First Bank Account</Text>
-          <Text style={styles.cardLink}>Click to view →</Text>
-        </View>
-
-        <View style={styles.card}>
-          <Text style={styles.cardCategory}>Job Search</Text>
-          <Text style={styles.cardTitle}>Writing Your First Resume</Text>
-          <Text style={styles.cardLink}>Click to view →</Text>
+        <View style={styles.divider}>
+          <Text style={styles.subtitle}>
+            {`\nThe IDE Project`}
+          </Text>
+          <Text style={styles.subdescription}>
+            {`Youth Led Initiative\n\nThe Ide Project is a youth-led initiative\nconnecting exonerees nationwide with\nverified reentry support organizations,\nhousing assistance, employment\nprograms, legal resources, and\ncommunity advocacy. We provide\ncomprehensive reentry support and\nexoneree resources to help rebuild lives\nafter wrongful conviction.`}
+          </Text>
         </View>
 
-        <View style={styles.card}>
-          <Text style={styles.cardCategory}>Housing Options</Text>
-          <Text style={styles.cardTitle}>Navigating Secure Reentry Housing</Text>
-          <Text style={styles.cardLink}>Click to view →</Text>
-        </View>
+        
       </ScrollView>
     </SafeAreaView>
   );
@@ -64,6 +55,19 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: "#ffffff",
+  },
+  subtitle:{
+    fontSize:23,
+  },
+  subdescription:{
+    color: "#5e5e5e"
+  },
+
+  divider: {
+    height: 1,                
+    backgroundColor: '#CCC', 
+    width: '100%',          
+    marginVertical: 15,
   },
   navbar: {
     height: 60,
@@ -136,7 +140,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#d57e57"
   },
   volunteerBtn: {
-    backgroundColor: "#FFFFFF",
+    borderWidth: 2,      
+    borderColor: '#000000',    
+    backgroundColor: 'transparent',
   },
   ctaText: {
     color: "#000000",
