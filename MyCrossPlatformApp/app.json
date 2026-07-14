@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "MyCrossPlatformApp",
+    "slug": "MyCrossPlatformApp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "mycrossplatformapp",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.vajra.mycrossplatformapp"
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    }
+  }
+}
