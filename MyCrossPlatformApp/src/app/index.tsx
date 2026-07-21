@@ -1,14 +1,14 @@
 import React from "react";
 import { Text, View, StyleSheet, ScrollView, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Stack } from 'expo-router';
+import { Tabs } from 'expo-router';
 
 export default function Index() {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <Stack.Screen 
+      <Tabs.Screen 
         options={{ 
-          title: 'The IDE Project',
+          title: 'Home',
           headerRight: () => (
             <View style={styles.headerButtonsContainer}>
               <Pressable style={styles.signInButton}>
