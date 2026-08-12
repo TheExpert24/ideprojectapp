@@ -40,12 +40,33 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="help"
         options={{
-          title: 'Profile',
+          title: 'Help',
           tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? "settings" : "settings-outline"} color={color} size={22} />
+            <Ionicons name={focused ? "bulb-outline" : "bulb"} color={color} size={22} />
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="signup"
+        options={{
+          title: 'Sign Up',
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="signin"
+        options={{
+          title: 'Sign In',
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="main"
+        options={{
+          title: 'Home',
+          href: null,
         }}
       />
     </Tabs>

@@ -5,18 +5,20 @@ import { Tabs, Link, useLocalSearchParams, useRouter } from 'expo-router';
 import { useAuth } from './authStore';
 import { supabase } from './supabaseClient';
 
+// Helper function to extract a neat display name from an email address
 const getNameFromEmail = (email: string): string => {
-  if (!email) return 'User';
+  if (!email) return "User";
   const handle = email.split('@')[0];
   const firstPart = handle.split(/[._-]/)[0];
   return firstPart.charAt(0).toUpperCase() + firstPart.slice(1);
 };
 
+
 export default function Index() {
-  const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const router = useRouter();
   const authUser = useAuth();
   const params = useLocalSearchParams<{ pendingEmail?: string; pendingName?: string }>();
+  const router = useRouter();
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   const pendingEmail = typeof params.pendingEmail === 'string' ? params.pendingEmail : '';
   const pendingName = typeof params.pendingName === 'string' ? params.pendingName : '';
@@ -26,73 +28,61 @@ export default function Index() {
     name: pendingName || getNameFromEmail(pendingEmail),
   } : null);
 
-  const displayName = user?.name || (user?.email ? getNameFromEmail(user.email) : 'User');
+  // Determine the best available display name string
+  const displayName = user?.name || (user?.email ? getNameFromEmail(user.email) : "User");
   const avatarLetter = displayName.charAt(0).toUpperCase();
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setShowProfileMenu(false);
+    router.replace('/');
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <Tabs.Screen 
         options={{ 
-          title: 'Home',
+          title: 'Home', 
           headerRight: () => (
             <View style={styles.headerButtonsContainer}>
               {user ? (
                 <View style={styles.profileMenuWrapper}>
                   <Pressable
                     style={styles.profileButtonContainer}
-                    onPress={() => setShowProfileMenu(prev => !prev)}
+                    onPress={(e) => {
+                        e.stopPropagation();
+                        setShowProfileMenu((prev) => !prev);
+                    }}
                   >
                     <View style={styles.avatarIcon}>
-                      <Text style={styles.avatarText}>
-                        {avatarLetter}
-                      </Text>
+                      <Text style={styles.avatarText}>{avatarLetter}</Text>
                     </View>
-
-                    <Text style={styles.greetingText}>
-                      Hi {displayName}
-                    </Text>
+                    <Text style={styles.greetingText}>Hi {displayName}</Text>
                   </Pressable>
 
-                    {showProfileMenu && (
+                  {showProfileMenu ? (
                     <View style={styles.profileMenu}>
-                      <Pressable
-                        style={styles.signOutButton}
-                        onPress={async () => {
-                          await supabase.auth.signOut();
-                          setShowProfileMenu(false);
-                          router.replace('/');
-                        }}
-                      >
-                        <Text style={styles.signOutText}>
-                          Sign Out
-                        </Text>
+                      <Pressable style={styles.signOutButton} onPress={handleSignOut}>
+                        <Text style={styles.signOutText}>Sign Out</Text>
                       </Pressable>
                     </View>
-                  )}
+                  ) : null}
                 </View>
               ) : (
+                // Fallback authentication routing button actions when unauthenticated
                 <>
-                  <Pressable
-                    style={styles.signInButton}
-                    onPress={() => router.push('/signin')}
-                  >
-                    <Text style={styles.signInText}>
-                      Sign In
-                    </Text>
-                  </Pressable>
-
-                  <Pressable
-                    style={styles.signUpButton}
-                    onPress={() => router.push('/signup')}
-                  >
-                    <Text style={styles.signUpText}>
-                      Sign Up
-                    </Text>
+                  <Link href="signin" asChild>
+                    <Pressable style={styles.signInButton}>
+                      <Text style={styles.signInText}>Sign In</Text>
+                    </Pressable>
+                  </Link>
+                  <Pressable style={styles.signUpButton} onPress={() => router.push('/signup')}>
+                    <Text style={styles.signUpText}>Sign Up</Text>
                   </Pressable>
                 </>
               )}
             </View>
-          ),
+          ) 
         }} 
       />
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -103,18 +93,13 @@ export default function Index() {
           </Text>
         </View>
         <View style={styles.ctaContainer}>
-              <Pressable style={[styles.ctaButton, styles.helpBtn]}>
-                <Text style={styles.ctaText2}>  I Need Help  </Text>
-              </Pressable>
-              <Pressable style={[styles.ctaButton, styles.volunteerBtn]}>
-                <Text style={styles.ctaText}>  I Want to Help  </Text>
-              </Pressable>
+          <Pressable style={[styles.ctaButton, styles.helpBtn]}>
+            <Text style={styles.ctaText2}> I Need Help </Text>
+          </Pressable>
+          <Pressable style={[styles.ctaButton, styles.volunteerBtn]}>
+            <Text style={styles.ctaText}> I Want to Help </Text>
+          </Pressable>
         </View>
-        
-        
-
-
-        
       </ScrollView>
     </SafeAreaView>
   );
@@ -140,11 +125,10 @@ const styles = StyleSheet.create({
   subdescription:{
     color: "#5e5e5e",
   },
-
   divider: {
-    height: 1,                
-    backgroundColor: '#CCC', 
-    width: '100%',          
+    height: 1,
+    backgroundColor: '#CCC',
+    width: '100%',
     marginVertical: 15,
   },
   navbar: {
@@ -171,7 +155,7 @@ const styles = StyleSheet.create({
   signUpButton:{
     paddingHorizontal:14,
     paddingVertical:6,
-    borderRadius: 6,  
+    borderRadius: 6,
     backgroundColor: 'transparent',
   },
   signInText: {
@@ -223,8 +207,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   volunteerBtn: {
-    borderWidth: 2,      
-    borderColor: '#000000',    
+    borderWidth: 2,
+    borderColor: '#000000',
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
@@ -273,60 +257,62 @@ const styles = StyleSheet.create({
   headerButtonsContainer: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 8, 
+    gap: 8,
+    paddingRight: 12,
+  },
+  
+  // Custom interface layouts for user profile header rendering
+  profileMenuWrapper: {
+    position: 'relative',
+    alignItems: 'center',
   },
   profileButtonContainer: {
-    flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    justifyContent: 'center',
+    minWidth: 60,
   },
   avatarIcon: {
     width: 32,
     height: 32,
     borderRadius: 16,
     backgroundColor: '#d57e57',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 2,
   },
   avatarText: {
-    color: '#fff',
-    fontWeight: '700',
+    color: '#ffffff',
+    fontSize: 14,
+    fontWeight: 'bold',
   },
   greetingText: {
-    color: '#111',
+    fontSize: 11,
+    fontWeight: '500',
+    color: '#343639',
+    textAlign: 'center',
+  },
+  profileMenu: {
+    position: 'absolute',
+    top: 54,
+    right: 0,
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+    borderRadius: 8,
+    padding: 8,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 3,
+    zIndex: 20,
+  },
+  signOutButton: {
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+  },
+  signOutText: {
+    color: '#111827',
     fontSize: 14,
+    fontWeight: '600',
   },
-  profileMenuWrapper: {
-  position: 'relative',
-},
-profileMenu: {
-  position: 'absolute',
-  top: 42,
-  right: 0,
-  backgroundColor: '#ffffff',
-  borderWidth: 1,
-  borderColor: '#e5e7eb',
-  borderRadius: 8,
-  padding: 6,
-  minWidth: 100,
-  shadowColor: '#000',
-  shadowOpacity: 0.15,
-  shadowRadius: 6,
-  shadowOffset: {
-    width: 0,
-    height: 3,
-  },
-  elevation: 5,
-  zIndex: 999,
-},
-
-signOutButton: {
-  paddingVertical: 10,
-  paddingHorizontal: 12,
-},
-
-signOutText: {
-  color: '#111111',
-  fontSize: 14,
-},
 });
