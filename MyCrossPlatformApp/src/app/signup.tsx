@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { supabase } from './supabaseClient';
 import { useRouter } from 'expo-router';
-import { useAuth } from './authStore';
+import { useAuth } from '../app/authStore';
 import {
   StyleSheet,
   Text,
